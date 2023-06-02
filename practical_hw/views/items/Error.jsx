@@ -1,3 +1,4 @@
+// This was my attempt to run an error handling for incorrectly inputted prices or names. 
 const React = require('react')
 function Error(props) {
     return(
