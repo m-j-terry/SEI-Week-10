@@ -1,3 +1,61 @@
+/* ATTEMPT #3 */
+let matrix = []
+let number = 1
+let iterator1 = 0
+let iterator2 = 1
+function generateMatrix(num) {
+    let top = 0
+    let left = 0 
+    let bottom = num - 1
+    let right = num - 1
+    let square = num*num
+    //generate matrix arrays
+    for (let i = 0; i < num; i++){
+        matrix.push([])
+        fillMatrix(matrix[i])  
+    }
+    function fillMatrix(arr){
+        for (let i = 0; i < num; i++){
+            arr.push(i - i)
+        }
+    }
+    while (number <= square) {
+        const recursion = () => {
+            //top
+            for (let i = left; i < num; i++) {
+                matrix[top].splice(i, 1, number)
+                number++
+            }
+            //right
+            for (let i = top + 1; i < num; i++) {
+                matrix[i].splice(right, 1, number)
+                number++
+            }
+            //bottom
+            for (let i = 1; i < num - left; i++) {
+                if (number <= square) {
+                matrix[bottom].splice(right - i, 1, number)
+                number++
+                }
+            }
+            //left
+                for (let i = num - 2; i > 0 + left; i--) {
+                    matrix[i].splice(left, 1, number)
+                    number++
+            }
+            //top for odd
+            left++
+            top++
+            bottom--
+            right--
+            num--
+            }
+            recursion()
+        }
+        console.log(matrix)
+    }
+generateMatrix(10)
+
 /* ATTEMPT #5 */
 /* let matrix = []
 let number = 1
@@ -110,69 +168,6 @@ generateMatrix(5)
 generateMatrix(5)
 */
 
-
-/* ATTEMPT #3 */
-
-let matrix = []
-let number = 1
-let iterator1 = 0
-let iterator2 = 1
-function generateMatrix(num) {
-    let top = 0
-    let left = 0 
-    let bottom = num - 1
-    let right = num - 1
-    let movement = num 
-    let square = num*num
-    //generate matrix arrays
-    for (let i = 0; i < num; i++){
-        matrix.push([])
-        fillMatrix(matrix[i])  
-    }
-    function fillMatrix(arr){
-        for (let i = 0; i < num; i++){
-            arr.push(i - i)
-        }
-    }
-    while (number <= square) {
-        const recursion = () => {
-            // number--
-            //top
-            for (let i = iterator1; i < movement; i++) {
-                matrix[top].splice(i, 1, number)
-                number++
-            }
-            //right
-            for (let i = iterator2; i < movement; i++) {
-                matrix[i].splice(right, 1, number)
-                number++
-            }
-            //bottom
-            for (let i = iterator2; i < movement - iterator1; i++) {
-                matrix[bottom].splice(right - i, 1, number)
-                number++
-            }
-            //left
-            if (number <= square){
-                for (let i = movement - 2; i > 0; i--) {
-                    matrix[i].splice(left, 1, number)
-                    number++
-                }
-            }
-            movement--
-            left++
-            top++
-            bottom--
-            right--
-            iterator1++
-            // number--
-            // iterator2++
-            }
-            recursion()
-        }
-        console.log(matrix)
-    }
-generateMatrix(4)
 
 /* ATTEMPT #2 */
 /*
