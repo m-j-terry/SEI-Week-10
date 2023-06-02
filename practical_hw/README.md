@@ -1,0 +1,5 @@
+# SEI-Week-10 Practical Homework
+-This program utilizes node.js in conjunction with express.js, mongoDB, mongoose, jsxEngine, nodemon, dotenv, and method-override, to create a responsive, RESTful API.
+-you can run this application through the browser by running the command "npm run dev" into your terminal (make sure you have forked the practical_hw directory and have navigated your way into it using cd), then typing "http://localhost:3000/items/new" into your browser.
+-This will open the page where you may input the name of a new item and its price. With a bit more implementation, this framework could be expanded into a shopping list that calculated total price by multiplying the number of units by their individual price. 
+-Once you input a name and a price, the name and price are saved into a database with a unique id, and the page redirects to a page for item you've created using its id. From here, you may edit or delete the information for this item, or you may return to the index page, which lists all of the items that have been created and sent into the database!

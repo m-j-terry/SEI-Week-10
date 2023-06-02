@@ -27,17 +27,19 @@ app.get('/items', async (req, res) => {
     }
 })
 
-
 // NEW
-app.get('/items/:id', (req, res) => {
-    
+app.get('/items/new', (req, res) => {
+    res.render('items/New')
 })
 
 
 // DELETE
 app.delete('/items/:id', async (req, res) => {
     try {
-
+        await Item.findOneAndDelete({"_id": req.params.id})
+        .then(() => {
+            res.redirect('/items')
+        })
     } catch (error) {
         res.status(400).send({message: error.message})
     }
@@ -47,7 +49,11 @@ app.delete('/items/:id', async (req, res) => {
 // UPDATE 
 app.put('/items/:id', async (req, res) => {
     try {
-
+        await Item.findOneAndUpdate({'_id': req.params.id},
+        req.body, { new: true})
+        .then(() => {
+            res.redirect(`/items/${req.params.id}`)
+        })
     } catch (error) {
         res.status(400).send({message: error.message})
     }
@@ -58,8 +64,13 @@ app.put('/items/:id', async (req, res) => {
 // CREATE
 app.post('/items', async (req, res) => {
     try {
+        //the if else block was my attempt to run error handling for the name and price fields; it does not appear to function as I'd hoped.
+        if (req.body.price !== Number || req.body.name !== String) {
+            res.redirect('/items/error')
+        } else {
         const createdItem = await Item.create(req.body)
         res.redirect(`/items/${createdItem._id}`)
+        }
     } catch (error) {
         res.status(400).send({message: error.message})
     }
@@ -68,9 +79,12 @@ app.post('/items', async (req, res) => {
 
 
 // EDIT
-app.get('/items/:id', async (req, res) => {
+app.get('/items/:id/edit', async (req, res) => {
     try {
-
+        const foundItem = await Item.findOne({_id: req.params.id})
+        res.render('items/edit', {
+            item: foundItem
+        })
     } catch (error) {
         res.status(400).send({message: error.message})
     }
@@ -81,7 +95,8 @@ app.get('/items/:id', async (req, res) => {
 // SHOW
 app.get('/items/:id', async (req, res) => {
     try {
-
+        const foundItem = await Item.findOne({_id: req.params.id})
+        res.render('items/Show', {item: foundItem})
     } catch (error) {
         res.status(400).send({message: error.message})
     }

@@ -1,6 +1,6 @@
 const React = require('react')
 
-function index(props){
+function Index(props){
     return(
         <div>'
             <h1>Items Index Page</h1>
