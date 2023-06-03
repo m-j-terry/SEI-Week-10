@@ -54,7 +54,7 @@ function generateMatrix(num) {
         }
         console.log(matrix)
     }
-generateMatrix(10)
+generateMatrix(5)
 
 /* ATTEMPT #5 */
 /* let matrix = []
